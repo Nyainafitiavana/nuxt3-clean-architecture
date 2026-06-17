@@ -70,9 +70,9 @@
 import { ref, onMounted } from 'vue';
 import { useUsers } from '../../app/features/users/composables/useUsers';
 
-import UserTable from '../../components/users/UserTable.vue';
+import UserTable from '../../components/features/users/UserTable.vue';
 import Pagination from '../../components/shared/Pagination.vue';
-import UserModal from '../../components/users/UserModal.vue';
+import UserModal from '../../components/features/users/UserModal.vue';
 import DeleteModal from '../../components/shared/DeleteModal.vue';
 
 // ================= STORE =================

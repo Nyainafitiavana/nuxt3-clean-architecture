@@ -35,7 +35,7 @@
 // Features: Edit and delete event emission
 
 
-import { User } from '../../domain/users/models/user.model';
+import { User } from '../../../domain/users/models/user.model';
 
 interface Props {
   user: User;

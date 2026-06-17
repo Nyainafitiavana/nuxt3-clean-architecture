@@ -29,7 +29,7 @@ import type {
   User,
   CreateUserRequest,
   UpdateUserRequest,
-} from '../../domain/users/models/user.model';
+} from '../../../domain/users/models/user.model';
 
 const props = defineProps<{
   open: boolean;

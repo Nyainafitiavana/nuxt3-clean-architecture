@@ -43,9 +43,9 @@
 // Features: Empty/loading states, user list iteration
 
 import { computed } from 'vue';
-import { User } from '../../domain/users/models/user.model';
+import { User } from '../../../domain/users/models/user.model';
 import UserRow from './UserRow.vue';
-import BaseTableSkeleton from '../shared/BaseTableSkeleton.vue';
+import BaseTableSkeleton from '../../shared/BaseTableSkeleton.vue';
 
 interface Props {
   users: User[];

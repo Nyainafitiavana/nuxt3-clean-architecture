@@ -66,7 +66,7 @@
   // Features: Create and edit modes, field validation, error display
 
   import { ref, computed, watch } from 'vue';
-  import { CreateUserRequest, UpdateUserRequest, User } from '../../domain/users/models/user.model';
+  import { CreateUserRequest, UpdateUserRequest, User } from '../../../domain/users/models/user.model';
 
   interface Props {
     user: User | null;

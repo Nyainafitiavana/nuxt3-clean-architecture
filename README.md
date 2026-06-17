@@ -50,10 +50,17 @@ src/
 │           └── user.repository.interface.ts  # Repository contract
 │
 ├── components/
-│   └── users/
-│       ├── UserForm.vue              # Create/edit form
-│       ├── UserTable.vue             # Users list table
-│       └── UserRow.vue               # Table row component
+│   ├── shared/
+│   │   ├── BaseTableSkeleton.vue              # Skeleton loading for table
+│   │   ├── DeleteModal.vue                    # Comfirm delete modal
+│   │   └── Pagination.vue                     # Pagination for table
+│   │    
+│   └── features/
+│       └── users/
+│           ├── UserForm.vue              # Create/edit form
+│           ├── UserModal.vue             # Modal for UserForm
+│           ├── UserTable.vue             # Users list table
+│           └── UserRow.vue               # Table row component
 │
 ├── pages/
 │   └── users/
