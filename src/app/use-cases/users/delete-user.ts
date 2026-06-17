@@ -3,6 +3,7 @@
 // This use case is responsible for deleting an existing user.
 
 import type { IUserRepository } from '~/domain/interfaces/user.repository.interface';
+import type { ExecuteResponse } from '~/types/api.types';
 
 /**
  * DeleteUserUseCase
@@ -19,10 +20,10 @@ export class DeleteUserUseCase {
   /**
    * Execute the use case
    * @param id - User ID to delete
-   * @returns Promise<void>
+   * @returns Promise<ExecuteResponse> - Response with backend message
    * @throws Error if the repository operation fails
    */
-  async execute(id: number): Promise<void> {
+  async execute(id: number): Promise<ExecuteResponse> {
     // In a real application, you could add business logic here:
     // - Existence check
     // - Authorization checks

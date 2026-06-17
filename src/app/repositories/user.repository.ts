@@ -19,14 +19,13 @@ export class UserRepository implements IUserRepository {
 
   /**
    * Retrieve all users from the API with pagination
-   * @returns Promise<User[]> - Array of users from the server
+   * @returns Promise<Paginate<User[]>> - Paginated list of users
    */
-  async getAll(): Promise<User[]> {
+  async getAll(): Promise<Paginate<User[]>> {
     try {
       const response = await apiService.get<User[]>(this.baseUrl);
-      // Extract data array from paginated response
-      const paginatedData = response.data as Paginate<User[]>;
-      return paginatedData.data;
+      // Return the full paginated response
+      return response.data;
     } catch (error) {
       console.error('[UserRepository] Failed to fetch users', error);
       throw error;
@@ -53,17 +52,13 @@ export class UserRepository implements IUserRepository {
   /**
    * Create a new user
    * @param data - User creation data (name, email)
-   * @returns Promise<User> - The newly created user with assigned ID
+   * @returns Promise<ExecuteResponse<User>> - Response with created user data and message
    */
-  async create(data: CreateUserRequest): Promise<User> {
+  async create(data: CreateUserRequest): Promise<ExecuteResponse<User>> {
     try {
       const response = await apiService.post<User>(this.baseUrl, data);
-      // Extract data from ExecuteResponse
-      const executeResponse = response.data as ExecuteResponse<User>;
-      if (!executeResponse.data) {
-        throw new Error('No data returned from create operation');
-      }
-      return executeResponse.data;
+      // Return the full ExecuteResponse to access success flag and message
+      return response.data;
     } catch (error) {
       console.error('[UserRepository] Failed to create user', error);
       throw error;
@@ -74,17 +69,13 @@ export class UserRepository implements IUserRepository {
    * Update an existing user
    * @param id - The user ID to update
    * @param data - User update data (partial fields)
-   * @returns Promise<User> - The updated user object
+   * @returns Promise<ExecuteResponse<User>> - Response with updated user data and message
    */
-  async update(id: number, data: UpdateUserRequest): Promise<User> {
+  async update(id: number, data: UpdateUserRequest): Promise<ExecuteResponse<User>> {
     try {
       const response = await apiService.put<User>(`${this.baseUrl}/${id}`, data);
-      // Extract data from ExecuteResponse
-      const executeResponse = response.data as ExecuteResponse<User>;
-      if (!executeResponse.data) {
-        throw new Error('No data returned from update operation');
-      }
-      return executeResponse.data;
+      // Return the full ExecuteResponse to access success flag and message
+      return response.data;
     } catch (error) {
       console.error(`[UserRepository] Failed to update user with ID ${id}`, error);
       throw error;
@@ -94,11 +85,13 @@ export class UserRepository implements IUserRepository {
   /**
    * Delete a user
    * @param id - The user ID to delete
-   * @returns Promise<void>
+   * @returns Promise<ExecuteResponse> - Response with success message
    */
-  async delete(id: number): Promise<void> {
+  async delete(id: number): Promise<ExecuteResponse> {
     try {
-      await apiService.delete(`${this.baseUrl}/${id}`);
+      const response = await apiService.delete(`${this.baseUrl}/${id}`);
+      // Return the full ExecuteResponse to access success flag and message
+      return response.data;
     } catch (error) {
       console.error(`[UserRepository] Failed to delete user with ID ${id}`, error);
       throw error;

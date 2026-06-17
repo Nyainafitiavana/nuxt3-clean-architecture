@@ -2,8 +2,9 @@
 // Use cases contain the business logic of the application.
 // This use case is responsible for updating an existing user.
 
-import type { User, UpdateUserRequest } from '~/domain/models/user.model';
+import type { UpdateUserRequest } from '~/domain/models/user.model';
 import type { IUserRepository } from '~/domain/interfaces/user.repository.interface';
+import type { ExecuteResponse } from '~/types/api.types';
 
 /**
  * UpdateUserUseCase
@@ -21,10 +22,10 @@ export class UpdateUserUseCase {
    * Execute the use case
    * @param id - User ID to update
    * @param data - User update data (partial fields)
-   * @returns Promise<User> - The updated user
+   * @returns Promise<ExecuteResponse<User>> - Response with updated user and backend message
    * @throws Error if the repository operation fails
    */
-  async execute(id: number, data: UpdateUserRequest): Promise<User> {
+  async execute(id: number, data: UpdateUserRequest) {
     // In a real application, you could add business logic here:
     // - Validation
     // - Existence check

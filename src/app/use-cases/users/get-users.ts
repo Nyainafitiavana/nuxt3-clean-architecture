@@ -6,11 +6,12 @@
 
 import type { User } from '~/domain/models/user.model';
 import type { IUserRepository } from '~/domain/interfaces/user.repository.interface';
+import type { Paginate } from '~/types/api.types';
 
 /**
  * GetUsersUseCase
- * Responsibility: Retrieve all users from the repository
- * Business Logic: Execute the operation and return the list of users
+ * Responsibility: Retrieve all users from the repository with pagination
+ * Business Logic: Execute the operation and return the paginated list of users
  */
 export class GetUsersUseCase {
   /**
@@ -21,10 +22,10 @@ export class GetUsersUseCase {
 
   /**
    * Execute the use case
-   * @returns Promise<User[]> - List of all users
+   * @returns Promise<Paginate<User[]>> - Paginated list of all users
    * @throws Error if the repository operation fails
    */
-  async execute(): Promise<User[]> {
+  async execute(): Promise<Paginate<User[]>> {
     return this.repository.getAll();
   }
 }

@@ -4,6 +4,7 @@
 // This allows us to swap implementations (e.g., HTTP, mock, local storage) without changing client code.
 
 import type { User, CreateUserRequest, UpdateUserRequest } from '../models/user.model';
+import type { Paginate, ExecuteResponse } from '~/types/api.types';
 
 /**
  * IUserRepository interface
@@ -12,10 +13,10 @@ import type { User, CreateUserRequest, UpdateUserRequest } from '../models/user.
  */
 export interface IUserRepository {
   /**
-   * Retrieve all users
-   * @returns Promise<User[]> - Array of all users
+   * Retrieve all users with pagination
+   * @returns Promise<Paginate<User[]>> - Paginated list of users
    */
-  getAll(): Promise<User[]>;
+  getAll(): Promise<Paginate<User[]>>;
 
   /**
    * Retrieve a single user by ID
@@ -27,22 +28,22 @@ export interface IUserRepository {
   /**
    * Create a new user
    * @param data - User creation data
-   * @returns Promise<User> - The created user with assigned ID
+   * @returns Promise<ExecuteResponse<User>> - Response with created user data
    */
-  create(data: CreateUserRequest): Promise<User>;
+  create(data: CreateUserRequest): Promise<ExecuteResponse<User>>;
 
   /**
    * Update an existing user
    * @param id - User ID
    * @param data - User update data
-   * @returns Promise<User> - The updated user
+   * @returns Promise<ExecuteResponse<User>> - Response with updated user data
    */
-  update(id: number, data: UpdateUserRequest): Promise<User>;
+  update(id: number, data: UpdateUserRequest): Promise<ExecuteResponse<User>>;
 
   /**
    * Delete a user
    * @param id - User ID
-   * @returns Promise<void>
+   * @returns Promise<ExecuteResponse> - Response with success message
    */
-  delete(id: number): Promise<void>;
+  delete(id: number): Promise<ExecuteResponse>;
 }

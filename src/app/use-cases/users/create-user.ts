@@ -5,6 +5,7 @@
 
 import type { User, CreateUserRequest } from '~/domain/models/user.model';
 import type { IUserRepository } from '~/domain/interfaces/user.repository.interface';
+import type { ExecuteResponse } from '~/types/api.types';
 
 /**
  * CreateUserUseCase
@@ -21,10 +22,10 @@ export class CreateUserUseCase {
   /**
    * Execute the use case
    * @param data - User creation data (name, email)
-   * @returns Promise<User> - The newly created user
+   * @returns Promise<ExecuteResponse<User>> - Response with created user and backend message
    * @throws Error if the repository operation fails
    */
-  async execute(data: CreateUserRequest): Promise<User> {
+  async execute(data: CreateUserRequest): Promise<ExecuteResponse<User>> {
     // In a real application, you could add business logic here:
     // - Validation
     // - Duplicate checking

@@ -20,8 +20,11 @@ export function useUsers() {
   // Expose reactive state from the store
 
   const users = computed(() => store.users);
+  const totalRows = computed(() => store.totalRows);
+  const currentPage = computed(() => store.currentPage);
   const loading = computed(() => store.loading);
   const error = computed(() => store.error);
+  const successMessage = computed(() => store.successMessage);
   const hasUsers = computed(() => store.hasUsers);
   const userCount = computed(() => store.userCount);
 
@@ -33,6 +36,7 @@ export function useUsers() {
   const updateUser = store.updateUser;
   const deleteUser = store.deleteUser;
   const clearError = store.clearError;
+  const clearSuccessMessage = store.clearSuccessMessage;
 
   // ==================== COMPOSABLE EXPOSURE ====================
   // Return all exposed properties and methods
@@ -40,8 +44,11 @@ export function useUsers() {
   return {
     // State
     users,
+    totalRows,
+    currentPage,
     loading,
     error,
+    successMessage,
     // Computed
     hasUsers,
     userCount,
@@ -51,5 +58,6 @@ export function useUsers() {
     updateUser,
     deleteUser,
     clearError,
+    clearSuccessMessage,
   };
 }
