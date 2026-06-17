@@ -1,1 +1,26 @@
-// API Response Types\n// These interfaces define the standardized response format from the backend API.\n// All API endpoints follow this contract.\n\n/**\n * ExecuteResponse<T>\n * Standard response format for mutation operations (create, update, delete)\n * Used by POST, PUT, and DELETE endpoints\n */\nexport interface ExecuteResponse<T = unknown> {\n  success?: boolean;\n  message: string;\n  data?: T;\n  statusCode: number;\n}\n\n/**\n * Paginate<T>\n * Standard response format for list operations (get all with pagination)\n * Used by GET endpoints that return multiple items\n */\nexport interface Paginate<T> {\n  data: T;\n  totalRows: number;\n  page: number;\n}\n"
+// API Response Types
+// These interfaces define the standardized response format from the backend API.
+// All API endpoints follow this contract.
+
+/**
+ * ExecuteResponse<T>
+ * Standard response format for mutation operations (create, update, delete)
+ * Used by POST, PUT, and DELETE endpoints
+ */
+export interface ExecuteResponse<T = unknown> {
+  success?: boolean;
+  message: string;
+  data?: T;
+  statusCode: number;
+}
+
+/**
+ * Paginate<T>
+ * Standard response format for list operations (get all with pagination)
+ * Used by GET endpoints that return multiple items
+ */
+export interface Paginate<T> {
+  data: T;
+  totalRows: number;
+  page: number;
+}
