@@ -4,9 +4,9 @@
 // This use case is responsible for creating a new user.
 
 
-import { CreateUserRequest, User } from '../../../domain/models/user.model';
-import { IUserRepository } from '../../../domain/interfaces/user.repository.interface';
-import { ExecuteResponse } from '../../../types/api.types';
+import { CreateUserRequest, User } from '../../../../domain/users/models/user.model';
+import { IUserRepository } from '../../../../domain/users/interfaces/user.repository.interface';
+import { ExecuteResponse } from '../../../../types/api.types';
 
 /**
  * CreateUserUseCase

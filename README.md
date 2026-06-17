@@ -21,31 +21,33 @@ This is a complete CRUD application for managing users with a modern, scalable a
 ```
 src/
 ├── app/
-│   ├── services/
-│   │   └── api.ts                    # Centralized HTTP service
-│   │
-│   ├── repositories/
-│   │   └── user.repository.ts        # User data access layer
-│   │
-│   ├── use-cases/
+│   ├── features/
 │   │   └── users/
-│   │       ├── get-users.ts          # Get all users use case
-│   │       ├── create-user.ts        # Create user use case
-│   │       ├── update-user.ts        # Update user use case
-│   │       └── delete-user.ts        # Delete user use case
-│   │
-│   ├── stores/
-│   │   └── user.store.ts             # Pinia state management
-│   │
-│   └── composables/
-│       └── useUsers.ts               # Vue composable hook
-│
+│   │       ├── composables/
+│   │       │   └── useUsers.ts               # Vue composable hook
+│   │       │
+│   │       ├── repositories/
+│   │       │   └── user.repository.ts        # User data access layer
+│   │       │
+│   │       ├── stores/
+│   │       │   └── user.store.ts             # Pinia state management
+│   │       │
+│   │       └── use-cases/
+│   │           ├── get-users.ts          # Get all users use case
+│   │           ├── create-user.ts        # Create user use case
+│   │           ├── update-user.ts        # Update user use case
+│   │           └── delete-user.ts        # Delete user use case  
+│   │       
+│   └── shared/
+│       └── api.ts                    # Centralized HTTP service
+│   
 ├── domain/
-│   ├── models/
-│   │   └── user.model.ts             # User domain model
-│   │
-│   └── interfaces/
-│       └── user.repository.interface.ts  # Repository contract
+│   └── users
+│       ├── models/
+│       │   └── user.model.ts             # User domain model
+│       │
+│       └── interfaces/
+│           └── user.repository.interface.ts  # Repository contract
 │
 ├── components/
 │   └── users/
@@ -62,6 +64,7 @@ src/
 │       └── main.css                  # Global styles
 │
 └── types/                            # TypeScript type definitions
+    └── api.types.ts
 ```
 
 ## 🏗️ Clean Architecture Layers

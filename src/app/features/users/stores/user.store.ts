@@ -7,12 +7,12 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import { UserRepository } from '../repositories/user.repository';
-import { CreateUserRequest, UpdateUserRequest, User } from '../../domain/models/user.model';
-import { GetUsersUseCase } from '../use-cases/users/get-users';
-import { CreateUserUseCase } from '../use-cases/users/create-user';
-import { UpdateUserUseCase } from '../use-cases/users/update-user';
-import { DeleteUserUseCase } from '../use-cases/users/delete-user';
-import { ExecuteResponse, Paginate } from '../../types/api.types';
+import { CreateUserRequest, UpdateUserRequest, User } from '../../../../domain/users/models/user.model';
+import { GetUsersUseCase } from '../use-cases/get-users';
+import { CreateUserUseCase } from '../use-cases/create-user';
+import { UpdateUserUseCase } from '../use-cases/update-user';
+import { DeleteUserUseCase } from '../use-cases/delete-user';
+import { ExecuteResponse, Paginate } from '../../../../types/api.types';
 
 /**
  * useUserStore

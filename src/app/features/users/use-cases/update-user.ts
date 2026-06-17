@@ -4,8 +4,8 @@
 
 
 
-import { IUserRepository } from '../../../domain/interfaces/user.repository.interface';
-import { UpdateUserRequest } from '../../../domain/models/user.model';
+import { IUserRepository } from '../../../../domain/users/interfaces/user.repository.interface';
+import { UpdateUserRequest } from '../../../../domain/users/models/user.model';
 
 /**
  * UpdateUserUseCase

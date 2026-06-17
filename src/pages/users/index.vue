@@ -103,8 +103,8 @@
 // Features: CRUD operations, state management, user interactions
 
 import { ref, computed, onMounted } from 'vue';
-import { useUsers } from '../../app/composables/useUsers';
-import { CreateUserRequest, UpdateUserRequest, User } from '../../domain/models/user.model';
+import { useUsers } from '../../app/features/users/composables/useUsers';
+import { CreateUserRequest, UpdateUserRequest, User } from '../../domain/users/models/user.model';
 import UserForm from '../../components/users/UserForm.vue';
 import UserTable from '../../components/users/UserTable.vue';
 

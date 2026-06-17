@@ -4,10 +4,10 @@
 // The repository knows HOW to get data, but the use case knows WHAT data is needed and WHY.
 // This separation allows the business logic to remain independent of data access implementation.
 
-import { IUserRepository } from '../../domain/interfaces/user.repository.interface';
-import { ExecuteResponse, Paginate } from '../../types/api.types';
-import { CreateUserRequest, UpdateUserRequest, User } from '../../domain/models/user.model';
-import { apiService } from '../services/api';
+import { IUserRepository } from '../../../../domain/users/interfaces/user.repository.interface';
+import { ExecuteResponse, Paginate } from '../../../../types/api.types';
+import { CreateUserRequest, UpdateUserRequest, User } from '../../../../domain/users/models/user.model';
+import { apiService } from '../../../shared/api';
 
 /**
  * UserRepository class

@@ -4,9 +4,9 @@
 // They receive dependencies through constructor injection (Dependency Inversion Principle).
 // Each use case has a single responsibility and a single execute() method.
 
-import { IUserRepository } from '../../../domain/interfaces/user.repository.interface';
-import { Paginate } from '../../../types/api.types';
-import { User } from '../../../domain/models/user.model';
+import { IUserRepository } from '../../../../domain/users/interfaces/user.repository.interface';
+import { Paginate } from '../../../../types/api.types';
+import { User } from '../../../../domain/users/models/user.model';
 
 /**
  * GetUsersUseCase
