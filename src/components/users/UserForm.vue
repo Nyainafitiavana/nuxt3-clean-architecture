@@ -61,94 +61,105 @@
 </template>
 
 <script setup lang="ts">
-// UserForm Component
-// Responsibility: Collect and validate user input
-// Features: Create and edit modes, field validation, error display
+  // UserForm Component
+  // Responsibility: Collect and validate user input
+  // Features: Create and edit modes, field validation, error display
 
-import { ref, computed, watch } from 'vue';
-import { CreateUserRequest, UpdateUserRequest, User } from '../../domain/users/models/user.model';
+  import { ref, computed, watch } from 'vue';
+  import { CreateUserRequest, UpdateUserRequest, User } from '../../domain/users/models/user.model';
 
-interface Props {
-  user: User | null;
-  loading?: boolean;
-}
-
-interface Emits {
-  (e: 'submit', data: CreateUserRequest | UpdateUserRequest): void;
-  (e: 'cancel'): void;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  loading: false,
-});
-
-const emit = defineEmits<Emits>();
-
-// ==================== STATE ====================
-// Form data with default values
-const formData = ref({
-  name: props.user?.name || '',
-  email: props.user?.email || '',
-});
-
-// Watch for user changes to update form data
-watch(
-  () => props.user,
-  (newUser) => {
-    if (newUser) {
-      formData.value = {
-        name: newUser.name,
-        email: newUser.email,
-      };
-    } else {
-      formData.value = {
-        name: '',
-        email: '',
-      };
-    }
+  interface Props {
+    user: User | null;
+    loading?: boolean;
   }
-);
 
-// ==================== COMPUTED ====================
-// Determine if form is in edit mode
-const isEditMode = computed(() => !!props.user);
+  interface Emits {
+    (e: 'submit', data: CreateUserRequest | UpdateUserRequest): void;
+    (e: 'cancel'): void;
+  }
 
-// Simple field validation
-const nameError = computed(() => {
-  if (formData.value.name.trim().length === 0) return '';
-  if (formData.value.name.trim().length < 2) return 'Name must be at least 2 characters';
-  return '';
-});
+  const props = withDefaults(defineProps<Props>(), {
+    loading: false,
+  });
 
-const emailError = computed(() => {
-  if (formData.value.email.trim().length === 0) return '';
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(formData.value.email)) return 'Please enter a valid email';
-  return '';
-});
+  const emit = defineEmits<Emits>();
 
-const isValid = computed(() => {
-  return (
-    formData.value.name.trim().length >= 2 &&
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.value.email)
+  // ==================== STATE ====================
+  // Form data with default values
+  const formData = ref({
+    name: props.user?.name || '',
+    email: props.user?.email || '',
+  });
+
+  // Watch for user changes to update form data
+  watch(
+    () => props.user,
+    (newUser) => {
+      if (newUser) {
+        formData.value = {
+          name: newUser.name,
+          email: newUser.email,
+        };
+      } else {
+        formData.value = {
+          name: '',
+          email: '',
+        };
+      }
+    }
   );
-});
 
-// ==================== METHODS ====================
-// Handle form submission
-function handleSubmit(): void {
-  if (!isValid.value) return;
+  // ==================== COMPUTED ====================
+  // Determine if form is in edit mode
+  const isEditMode = computed(() => !!props.user);
 
-  const data = {
-    name: formData.value.name.trim(),
-    email: formData.value.email.trim(),
-  };
+  // Simple field validation
+  const nameError = computed(() => {
+    if (formData.value.name.trim().length === 0) return '';
+    if (formData.value.name.trim().length < 2) return 'Name must be at least 2 characters';
+    return '';
+  });
 
-  emit('submit', data);
-}
+  const emailError = computed(() => {
+    if (formData.value.email.trim().length === 0) return '';
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.value.email)) return 'Please enter a valid email';
+    return '';
+  });
 
-// Handle cancel action
-function handleCancel(): void {
-  emit('cancel');
-}
+  const isValid = computed(() => {
+    return (
+      formData.value.name.trim().length >= 2 &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.value.email)
+    );
+  });
+
+  // ==================== METHODS ====================
+  // Handle form submission
+  function handleSubmit(): void {
+    if (!isValid.value) return;
+
+    const data = {
+      name: formData.value.name.trim(),
+      email: formData.value.email.trim(),
+    };
+
+    emit('submit', data);
+  }
+
+  // Handle cancel action
+  function handleCancel(): void {
+    emit('cancel');
+  }
+
+  function resetForm(): void {
+    formData.value = {
+      name: '',
+      email: '',
+    };
+  }
+
+  defineExpose({
+    resetForm,
+  });
 </script>

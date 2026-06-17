@@ -41,6 +41,7 @@
               </h2>
             </div>
             <UserForm
+              ref="userFormRef"
               :user="editingUser"
               :loading="loading"
               @submit="handleFormSubmit"
@@ -138,7 +139,8 @@ const {
 
 // ==================== LOCAL STATE ====================
 // Component-specific state
-
+/**For cleaning form*/
+const userFormRef = ref<InstanceType<typeof UserForm> | null>(null);
 /** Currently edited user (null = create mode) */
 const editingUser = ref<User | null>(null);
 
@@ -188,7 +190,7 @@ async function handleFormSubmit(data: CreateUserRequest | UpdateUserRequest): Pr
       showSuccessMessage.value = true;
       successMessage.value = 'User created successfully';
       // Reset form
-      resetForm();
+      userFormRef.value?.resetForm();
       setTimeout(() => {
         showSuccessMessage.value = false;
       }, 3000);
@@ -242,14 +244,8 @@ function cancelDelete(): void {
  * Handle cancel from form
  */
 function handleCancel(): void {
-  resetForm();
-}
-
-/**
- * Reset form to create mode
- */
-function resetForm(): void {
   editingUser.value = null;
+  userFormRef.value?.resetForm();
 }
 
 /**
