@@ -4,14 +4,7 @@
 // This ensures consistent error handling, interceptors, and configuration.
 
 import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
-
-/**
- * Represents a standardized API response format
- */
-interface ApiResponse<T> {
-  status: number;
-  data: T;
-}
+import type { ExecuteResponse, Paginate } from '~/types/api.types';
 
 /**
  * API Service class that manages all HTTP communication
@@ -101,12 +94,13 @@ class ApiService {
   }
 
   /**
-   * GET request
+   * GET request with pagination
    * @param url - The endpoint path
    * @param config - Optional Axios config
+   * @returns Promise<AxiosResponse<Paginate<T>>> - Paginated response
    */
-  async get<T>(url: string, config = {}): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.get<T>(url, config);
+  async get<T>(url: string, config = {}): Promise<AxiosResponse<Paginate<T>>> {
+    return this.axiosInstance.get<Paginate<T>>(url, config);
   }
 
   /**
@@ -114,9 +108,10 @@ class ApiService {
    * @param url - The endpoint path
    * @param data - Request body
    * @param config - Optional Axios config
+   * @returns Promise<AxiosResponse<ExecuteResponse<T>>> - Execute response
    */
-  async post<T>(url: string, data: unknown, config = {}): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.post<T>(url, data, config);
+  async post<T>(url: string, data: unknown, config = {}): Promise<AxiosResponse<ExecuteResponse<T>>> {
+    return this.axiosInstance.post<ExecuteResponse<T>>(url, data, config);
   }
 
   /**
@@ -124,18 +119,20 @@ class ApiService {
    * @param url - The endpoint path
    * @param data - Request body
    * @param config - Optional Axios config
+   * @returns Promise<AxiosResponse<ExecuteResponse<T>>> - Execute response
    */
-  async put<T>(url: string, data: unknown, config = {}): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.put<T>(url, data, config);
+  async put<T>(url: string, data: unknown, config = {}): Promise<AxiosResponse<ExecuteResponse<T>>> {
+    return this.axiosInstance.put<ExecuteResponse<T>>(url, data, config);
   }
 
   /**
    * DELETE request
    * @param url - The endpoint path
    * @param config - Optional Axios config
+   * @returns Promise<AxiosResponse<ExecuteResponse>> - Execute response
    */
-  async delete<T>(url: string, config = {}): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.delete<T>(url, config);
+  async delete(url: string, config = {}): Promise<AxiosResponse<ExecuteResponse>> {
+    return this.axiosInstance.delete<ExecuteResponse>(url, config);
   }
 }
 

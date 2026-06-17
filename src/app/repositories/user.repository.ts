@@ -6,6 +6,7 @@
 
 import type { User, CreateUserRequest, UpdateUserRequest } from '~/domain/models/user.model';
 import type { IUserRepository } from '~/domain/interfaces/user.repository.interface';
+import type { ExecuteResponse, Paginate } from '~/types/api.types';
 import { apiService } from '~/app/services/api';
 
 /**
@@ -17,13 +18,15 @@ export class UserRepository implements IUserRepository {
   private readonly baseUrl = '/api/users';
 
   /**
-   * Retrieve all users from the API
+   * Retrieve all users from the API with pagination
    * @returns Promise<User[]> - Array of users from the server
    */
   async getAll(): Promise<User[]> {
     try {
       const response = await apiService.get<User[]>(this.baseUrl);
-      return response.data;
+      // Extract data array from paginated response
+      const paginatedData = response.data as Paginate<User[]>;
+      return paginatedData.data;
     } catch (error) {
       console.error('[UserRepository] Failed to fetch users', error);
       throw error;
@@ -38,7 +41,9 @@ export class UserRepository implements IUserRepository {
   async getById(id: number): Promise<User> {
     try {
       const response = await apiService.get<User>(`${this.baseUrl}/${id}`);
-      return response.data;
+      // For single item, extract from paginated response
+      const paginatedData = response.data as Paginate<User>;
+      return paginatedData.data as unknown as User;
     } catch (error) {
       console.error(`[UserRepository] Failed to fetch user with ID ${id}`, error);
       throw error;
@@ -53,7 +58,12 @@ export class UserRepository implements IUserRepository {
   async create(data: CreateUserRequest): Promise<User> {
     try {
       const response = await apiService.post<User>(this.baseUrl, data);
-      return response.data;
+      // Extract data from ExecuteResponse
+      const executeResponse = response.data as ExecuteResponse<User>;
+      if (!executeResponse.data) {
+        throw new Error('No data returned from create operation');
+      }
+      return executeResponse.data;
     } catch (error) {
       console.error('[UserRepository] Failed to create user', error);
       throw error;
@@ -69,7 +79,12 @@ export class UserRepository implements IUserRepository {
   async update(id: number, data: UpdateUserRequest): Promise<User> {
     try {
       const response = await apiService.put<User>(`${this.baseUrl}/${id}`, data);
-      return response.data;
+      // Extract data from ExecuteResponse
+      const executeResponse = response.data as ExecuteResponse<User>;
+      if (!executeResponse.data) {
+        throw new Error('No data returned from update operation');
+      }
+      return executeResponse.data;
     } catch (error) {
       console.error(`[UserRepository] Failed to update user with ID ${id}`, error);
       throw error;
