@@ -7,9 +7,7 @@
   <form @submit.prevent="handleSubmit" class="space-y-4 p-4">
     <!-- Name Field -->
     <div>
-      <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-        Name
-      </label>
+      <label for="name" class="block text-sm font-medium text-gray-700 mb-2"> Name </label>
       <input
         id="name"
         v-model="formData.name"
@@ -24,9 +22,7 @@
 
     <!-- Email Field -->
     <div>
-      <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-        Email
-      </label>
+      <label for="email" class="block text-sm font-medium text-gray-700 mb-2"> Email </label>
       <input
         id="email"
         v-model="formData.email"
@@ -70,10 +66,10 @@
 // Features: Create and edit modes, field validation, error display
 
 import { ref, computed, watch } from 'vue';
-import type { User, CreateUserRequest, UpdateUserRequest } from '~/domain/models/user.model';
+import { CreateUserRequest, UpdateUserRequest, User } from '../../domain/models/user.model';
 
 interface Props {
-  user?: User;
+  user: User | null;
   loading?: boolean;
 }
 

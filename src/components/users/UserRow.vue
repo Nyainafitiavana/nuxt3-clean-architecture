@@ -34,7 +34,8 @@
 // Responsibility: Display a single user row with actions
 // Features: Edit and delete event emission
 
-import type { User } from '~/domain/models/user.model';
+
+import { User } from '../../domain/models/user.model';
 
 interface Props {
   user: User;

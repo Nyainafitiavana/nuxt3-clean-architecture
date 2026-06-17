@@ -3,9 +3,9 @@
 // This composable simplifies access to the user store from components.
 // It exposes all necessary state and actions without exposing internal store details.
 
-import { useUserStore } from '~/app/stores/user.store';
 import { computed } from 'vue';
-import type { User, CreateUserRequest, UpdateUserRequest } from '~/domain/models/user.model';
+//import type { User, CreateUserRequest, UpdateUserRequest } from '~/domain/models/user.model';
+import { useUserStore } from '../stores/user.store';
 
 /**
  * useUsers composable

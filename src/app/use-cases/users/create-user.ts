@@ -3,9 +3,10 @@
 // They encapsulate a specific piece of business functionality.
 // This use case is responsible for creating a new user.
 
-import type { User, CreateUserRequest } from '~/domain/models/user.model';
-import type { IUserRepository } from '~/domain/interfaces/user.repository.interface';
-import type { ExecuteResponse } from '~/types/api.types';
+
+import { CreateUserRequest, User } from '../../../domain/models/user.model';
+import { IUserRepository } from '../../../domain/interfaces/user.repository.interface';
+import { ExecuteResponse } from '../../../types/api.types';
 
 /**
  * CreateUserUseCase

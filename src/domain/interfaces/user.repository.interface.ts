@@ -4,7 +4,7 @@
 // This allows us to swap implementations (e.g., HTTP, mock, local storage) without changing client code.
 
 import type { User, CreateUserRequest, UpdateUserRequest } from '../models/user.model';
-import type { Paginate, ExecuteResponse } from '~/types/api.types';
+import { ExecuteResponse, Paginate } from '../../types/api.types';
 
 /**
  * IUserRepository interface

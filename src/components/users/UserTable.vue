@@ -45,8 +45,8 @@
 // Features: Empty/loading states, user list iteration
 
 import { computed } from 'vue';
-import type { User } from '~/domain/models/user.model';
-import UserRow from '~/components/users/UserRow.vue';
+import { User } from '../../domain/models/user.model';
+import UserRow from './UserRow.vue';
 
 interface Props {
   users: User[];

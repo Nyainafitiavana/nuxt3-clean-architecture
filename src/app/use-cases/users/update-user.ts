@@ -2,9 +2,10 @@
 // Use cases contain the business logic of the application.
 // This use case is responsible for updating an existing user.
 
-import type { UpdateUserRequest } from '~/domain/models/user.model';
-import type { IUserRepository } from '~/domain/interfaces/user.repository.interface';
-import type { ExecuteResponse } from '~/types/api.types';
+
+
+import { IUserRepository } from '../../../domain/interfaces/user.repository.interface';
+import { UpdateUserRequest } from '../../../domain/models/user.model';
 
 /**
  * UpdateUserUseCase

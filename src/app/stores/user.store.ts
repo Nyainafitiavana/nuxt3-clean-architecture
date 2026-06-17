@@ -6,14 +6,13 @@
 
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import type { User } from '~/domain/models/user.model';
-import type { CreateUserRequest, UpdateUserRequest } from '~/domain/models/user.model';
-import type { Paginate, ExecuteResponse } from '~/types/api.types';
-import { UserRepository } from '~/app/repositories/user.repository';
-import { GetUsersUseCase } from '~/app/use-cases/users/get-users';
-import { CreateUserUseCase } from '~/app/use-cases/users/create-user';
-import { UpdateUserUseCase } from '~/app/use-cases/users/update-user';
-import { DeleteUserUseCase } from '~/app/use-cases/users/delete-user';
+import { UserRepository } from '../repositories/user.repository';
+import { CreateUserRequest, UpdateUserRequest, User } from '../../domain/models/user.model';
+import { GetUsersUseCase } from '../use-cases/users/get-users';
+import { CreateUserUseCase } from '../use-cases/users/create-user';
+import { UpdateUserUseCase } from '../use-cases/users/update-user';
+import { DeleteUserUseCase } from '../use-cases/users/delete-user';
+import { ExecuteResponse, Paginate } from '../../types/api.types';
 
 /**
  * useUserStore

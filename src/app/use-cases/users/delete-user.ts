@@ -2,8 +2,8 @@
 // Use cases contain the business logic of the application.
 // This use case is responsible for deleting an existing user.
 
-import type { IUserRepository } from '~/domain/interfaces/user.repository.interface';
-import type { ExecuteResponse } from '~/types/api.types';
+import { IUserRepository } from '../../../domain/interfaces/user.repository.interface';
+import { ExecuteResponse } from '../../../types/api.types';
 
 /**
  * DeleteUserUseCase

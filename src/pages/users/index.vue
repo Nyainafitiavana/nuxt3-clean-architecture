@@ -18,10 +18,7 @@
         class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex justify-between items-center"
       >
         <p class="text-red-800">{{ error }}</p>
-        <button
-          @click="clearError"
-          class="text-red-600 hover:text-red-900 font-semibold"
-        >
+        <button @click="clearError" class="text-red-600 hover:text-red-900 font-semibold">
           Dismiss
         </button>
       </div>
@@ -56,9 +53,7 @@
         <div class="lg:col-span-2">
           <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <div class="bg-gray-100 px-6 py-4 border-b border-gray-200">
-              <h2 class="text-lg font-semibold text-gray-900">
-                Users List ({{ userCount }})
-              </h2>
+              <h2 class="text-lg font-semibold text-gray-900">Users List ({{ userCount }})</h2>
             </div>
             <div class="overflow-x-auto">
               <UserTable
@@ -79,9 +74,7 @@
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
     >
       <div class="bg-white rounded-lg shadow-xl p-6 max-w-sm mx-4">
-        <h3 class="text-lg font-semibold text-gray-900 mb-4">
-          Delete User
-        </h3>
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Delete User</h3>
         <p class="text-gray-600 mb-6">
           Are you sure you want to delete this user? This action cannot be undone.
         </p>
@@ -110,10 +103,10 @@
 // Features: CRUD operations, state management, user interactions
 
 import { ref, computed, onMounted } from 'vue';
-import type { User, CreateUserRequest, UpdateUserRequest } from '~/domain/models/user.model';
-import UserForm from '~/components/users/UserForm.vue';
-import UserTable from '~/components/users/UserTable.vue';
-import { useUsers } from '~/app/composables/useUsers';
+import { useUsers } from '../../app/composables/useUsers';
+import { CreateUserRequest, UpdateUserRequest, User } from '../../domain/models/user.model';
+import UserForm from '../../components/users/UserForm.vue';
+import UserTable from '../../components/users/UserTable.vue';
 
 // ==================== COMPOSABLE ====================
 // Use the users composable for all state and actions
