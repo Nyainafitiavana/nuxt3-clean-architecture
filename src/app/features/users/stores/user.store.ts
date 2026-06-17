@@ -12,7 +12,7 @@ import { GetUsersUseCase } from '../use-cases/get-users';
 import { CreateUserUseCase } from '../use-cases/create-user';
 import { UpdateUserUseCase } from '../use-cases/update-user';
 import { DeleteUserUseCase } from '../use-cases/delete-user';
-import { ExecuteResponse, Paginate } from '../../../../types/api.types';
+import { ExecuteResponse } from '../../../../types/api.types';
 
 /**
  * useUserStore
@@ -31,6 +31,9 @@ export const useUserStore = defineStore('user', () => {
 
   /** Current page (for pagination) */
   const currentPage = ref<number>(1);
+
+  /** Current page size (for pagination)*/
+  const pageSize = ref<number>(10);
 
   /** Loading state - indicates if an operation is in progress */
   const loading = ref<boolean>(false);
@@ -64,6 +67,11 @@ export const useUserStore = defineStore('user', () => {
    */
   const userCount = computed(() => users.value.length);
 
+  /**
+   * Calculate totalPage for pagination
+   */
+  const totalPages = computed(() => Math.ceil(totalRows.value / pageSize.value));
+
   // ==================== ACTIONS ====================
   // Actions modify the state and handle business operations
 
@@ -72,22 +80,34 @@ export const useUserStore = defineStore('user', () => {
    * Sets loading state while fetching, clears errors on success
    * Stores pagination information for use in templates
    */
-  async function fetchUsers(): Promise<void> {
+  async function fetchUsers(page = currentPage.value, limit = pageSize.value): Promise<void> {
     loading.value = true;
-    error.value = null;
-    successMessage.value = null;
 
     try {
-      const paginatedResponse: Paginate<User[]> = await getUsersUseCase.execute();
-      users.value = paginatedResponse.data;
-      totalRows.value = paginatedResponse.totalRows;
-      currentPage.value = paginatedResponse.page;
-    } catch (err) {
-      error.value = err instanceof Error ? err.message : 'Failed to fetch users';
-      console.error('[useUserStore] fetchUsers error:', err);
+      const response = await getUsersUseCase.execute(page, limit);
+
+      users.value = response.data;
+      totalRows.value = response.totalRows;
+      currentPage.value = response.page;
     } finally {
       loading.value = false;
     }
+  }
+
+  /**
+   * Fetch all users when changing page
+   */
+  async function changePage(page: number) {
+    await fetchUsers(page, pageSize.value);
+  }
+
+  /**
+   * Fetch all users when changing pageSize
+   */
+  async function changePageSize(size: number) {
+    pageSize.value = size;
+
+    await fetchUsers(1, size);
   }
 
   /**
@@ -101,15 +121,15 @@ export const useUserStore = defineStore('user', () => {
 
     try {
       const response: ExecuteResponse<User> = await createUserUseCase.execute(data);
-      
+
       // Show backend message
       successMessage.value = response.message;
-      
+
       // Add the new user to the store's users array if data exists
       if (response.data) {
         users.value.push(response.data);
       }
-      
+
       return true;
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Failed to create user';
@@ -132,10 +152,10 @@ export const useUserStore = defineStore('user', () => {
 
     try {
       const response: ExecuteResponse<User> = await updateUserUseCase.execute(id, data);
-      
+
       // Show backend message
       successMessage.value = response.message;
-      
+
       // Update the user in the store's users array if data exists
       if (response.data) {
         const index = users.value.findIndex((u) => u.id === id);
@@ -143,7 +163,7 @@ export const useUserStore = defineStore('user', () => {
           users.value[index] = response.data;
         }
       }
-      
+
       return true;
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Failed to update user';
@@ -165,13 +185,13 @@ export const useUserStore = defineStore('user', () => {
 
     try {
       const response: ExecuteResponse = await deleteUserUseCase.execute(id);
-      
+
       // Show backend message
       successMessage.value = response.message;
-      
+
       // Remove the user from the store's users array
       users.value = users.value.filter((u) => u.id !== id);
-      
+
       return true;
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Failed to delete user';
@@ -204,14 +224,18 @@ export const useUserStore = defineStore('user', () => {
     users,
     totalRows,
     currentPage,
+    pageSize,
     loading,
     error,
     successMessage,
     // Computed
+    totalPages,
     hasUsers,
     userCount,
     // Actions
     fetchUsers,
+    changePage,
+    changePageSize,
     createUser,
     updateUser,
     deleteUser,

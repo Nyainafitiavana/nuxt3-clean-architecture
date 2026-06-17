@@ -22,6 +22,8 @@ export function useUsers() {
   const users = computed(() => store.users);
   const totalRows = computed(() => store.totalRows);
   const currentPage = computed(() => store.currentPage);
+  const pageSize = computed(() => store.pageSize);
+  const totalPages = computed(() => store.totalPages);
   const loading = computed(() => store.loading);
   const error = computed(() => store.error);
   const successMessage = computed(() => store.successMessage);
@@ -32,6 +34,8 @@ export function useUsers() {
   // Expose store actions directly
 
   const fetchUsers = store.fetchUsers;
+  const changePage = store.changePage;
+  const changePageSize = store.changePageSize;
   const createUser = store.createUser;
   const updateUser = store.updateUser;
   const deleteUser = store.deleteUser;
@@ -46,6 +50,8 @@ export function useUsers() {
     users,
     totalRows,
     currentPage,
+    pageSize,
+    totalPages,
     loading,
     error,
     successMessage,
@@ -54,6 +60,8 @@ export function useUsers() {
     userCount,
     // Actions
     fetchUsers,
+    changePage,
+    changePageSize,
     createUser,
     updateUser,
     deleteUser,

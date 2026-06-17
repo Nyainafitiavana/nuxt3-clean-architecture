@@ -21,10 +21,10 @@ export class UserRepository implements IUserRepository {
    * Retrieve all users from the API with pagination
    * @returns Promise<Paginate<User[]>> - Paginated list of users
    */
-  async getAll(): Promise<Paginate<User[]>> {
+  async getAll(page = 1, limit = 10): Promise<Paginate<User[]>> {
     try {
-      const response = await apiService.get<User[]>(this.baseUrl);
-      // Return the full paginated response
+      const response = await apiService.get<User[]>(`${this.baseUrl}?page=${page}&limit=${limit}`);
+
       return response.data;
     } catch (error) {
       console.error('[UserRepository] Failed to fetch users', error);

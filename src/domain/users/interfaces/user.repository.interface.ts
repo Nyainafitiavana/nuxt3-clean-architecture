@@ -16,7 +16,7 @@ export interface IUserRepository {
    * Retrieve all users with pagination
    * @returns Promise<Paginate<User[]>> - Paginated list of users
    */
-  getAll(): Promise<Paginate<User[]>>;
+  getAll(page?: number, limit?: number): Promise<Paginate<User[]>>;
 
   /**
    * Retrieve a single user by ID

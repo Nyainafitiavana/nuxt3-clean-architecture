@@ -25,7 +25,7 @@ export class GetUsersUseCase {
    * @returns Promise<Paginate<User[]>> - Paginated list of all users
    * @throws Error if the repository operation fails
    */
-  async execute(): Promise<Paginate<User[]>> {
-    return this.repository.getAll();
+  async execute(page = 1, limit = 10): Promise<Paginate<User[]>> {
+    return this.repository.getAll(page, limit);
   }
 }

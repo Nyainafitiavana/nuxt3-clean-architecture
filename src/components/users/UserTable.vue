@@ -6,9 +6,7 @@
   -->
   <div class="w-full">
     <!-- Loading State -->
-    <div v-if="loading" class="text-center py-8">
-      <p class="text-gray-600">Loading...</p>
-    </div>
+    <BaseTableSkeleton v-if="loading" :rows="pageSize" :columns="3" />
 
     <!-- Empty State -->
     <div v-else-if="!hasUsers" class="text-center py-8">
@@ -47,10 +45,12 @@
 import { computed } from 'vue';
 import { User } from '../../domain/users/models/user.model';
 import UserRow from './UserRow.vue';
+import BaseTableSkeleton from '../shared/BaseTableSkeleton.vue';
 
 interface Props {
   users: User[];
   loading?: boolean;
+  pageSize: number;
 }
 
 interface Emits {

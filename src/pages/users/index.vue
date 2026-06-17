@@ -58,9 +58,17 @@
             <div class="overflow-x-auto">
               <UserTable
                 :users="users"
+                :pageSize="pageSize"
                 :loading="loading"
                 @edit="handleEdit"
                 @delete="handleDelete"
+              />
+              <Pagination
+                :current-page="currentPage"
+                :total-pages="totalPages"
+                :page-size="pageSize"
+                @page-change="changePage"
+                @page-size-change="changePageSize"
               />
             </div>
           </div>
@@ -107,15 +115,21 @@ import { useUsers } from '../../app/features/users/composables/useUsers';
 import { CreateUserRequest, UpdateUserRequest, User } from '../../domain/users/models/user.model';
 import UserForm from '../../components/users/UserForm.vue';
 import UserTable from '../../components/users/UserTable.vue';
+import Pagination from '../../components/shared/Pagination.vue';
 
 // ==================== COMPOSABLE ====================
 // Use the users composable for all state and actions
 const {
   users,
   loading,
+  currentPage,
+  pageSize,
+  totalPages,
   error,
   userCount,
   fetchUsers,
+  changePage,
+  changePageSize,
   createUser,
   updateUser,
   deleteUser,
