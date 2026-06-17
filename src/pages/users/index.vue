@@ -27,7 +27,13 @@
 
     <!-- TABLE -->
     <div class="max-w-6xl mx-auto bg-white shadow rounded-lg overflow-hidden">
-      <UserTable :pageSize="pageSize" :users="users" :loading="loading" @edit="handleEdit" @delete="handleDelete" />
+      <UserTable
+        :pageSize="pageSize"
+        :users="users"
+        :loading="loading"
+        @edit="handleEdit"
+        @delete="handleDelete"
+      />
 
       <Pagination
         :current-page="currentPage"
@@ -48,7 +54,15 @@
     />
 
     <!-- DELETE MODAL -->
-    <DeleteModal v-if="showDeleteConfirmation" @confirm="confirmDelete" @cancel="cancelDelete" />
+    <DeleteModal
+      v-if="showDeleteConfirmation"
+      title="Delete User"
+      message="Are you sure you want to delete this user? This action cannot be undone."
+      confirmText="Delete"
+      cancelText="Cancel"
+      @confirm="confirmDelete"
+      @cancel="cancelDelete"
+    />
   </div>
 </template>
 
