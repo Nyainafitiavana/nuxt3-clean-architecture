@@ -1,0 +1,36 @@
+// Use Case: Create User
+// Use cases contain the business logic of the application.
+// They encapsulate a specific piece of business functionality.
+// This use case is responsible for creating a new user.
+
+import type { User, CreateUserRequest } from '~/domain/models/user.model';
+import type { IUserRepository } from '~/domain/interfaces/user.repository.interface';
+
+/**
+ * CreateUserUseCase
+ * Responsibility: Create a new user through the repository
+ * Business Logic: Accept user data and persist it through the repository
+ */
+export class CreateUserUseCase {
+  /**
+   * Constructor - Dependency Injection
+   * @param repository - The user repository implementation (injected)
+   */
+  constructor(private readonly repository: IUserRepository) {}
+
+  /**
+   * Execute the use case
+   * @param data - User creation data (name, email)
+   * @returns Promise<User> - The newly created user
+   * @throws Error if the repository operation fails
+   */
+  async execute(data: CreateUserRequest): Promise<User> {
+    // In a real application, you could add business logic here:
+    // - Validation
+    // - Duplicate checking
+    // - Transformation
+    // - Authorization checks
+
+    return this.repository.create(data);
+  }
+}

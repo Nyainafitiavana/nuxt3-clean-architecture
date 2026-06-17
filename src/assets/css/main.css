@@ -1,0 +1,49 @@
+/* Main Global Styles
+   This file contains global CSS and TailwindCSS directives.
+   TailwindCSS provides utility classes for building modern interfaces.
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom base styles */
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+}
+
+/* Custom component styles */
+@layer components {
+  /* Utility for smooth transitions */
+  .transition-smooth {
+    @apply transition-all duration-200 ease-in-out;
+  }
+
+  /* Card component */
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6;
+  }
+
+  /* Button component */
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply btn bg-blue-600 hover:bg-blue-700 text-white;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-600 hover:bg-red-700 text-white;
+  }
+
+  .btn-secondary {
+    @apply btn bg-gray-200 hover:bg-gray-300 text-gray-800;
+  }
+}
